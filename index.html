@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bente Wesselink — Model</title>
+
+  <!-- Google Fonts: Playfair Display (serif) + Inter (sans-serif) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ============================================================
+       NAVIGATION
+  ============================================================ -->
+  <nav class="nav" id="nav">
+    <a class="nav__logo" href="#hero">BW</a>
+
+    <!-- Hamburger button (mobile) -->
+    <button class="nav__hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <ul class="nav__links" id="nav-links">
+      <li><a href="#portfolio" class="nav__link">Portfolio</a></li>
+      <li><a href="#stats"     class="nav__link">Stats</a></li>
+      <li><a href="#about"     class="nav__link">About</a></li>
+      <li><a href="#contact"   class="nav__link">Contact</a></li>
+    </ul>
+  </nav>
+
+  <main>
+
+    <!-- ============================================================
+         SECTION 1 — HERO
+    ============================================================ -->
+    <section class="hero" id="hero">
+      <div class="hero__image-wrap">
+        <img
+          src="https://assets.deboekers.nl/assets/bente-wesselink/5A8A9557_2025-02-14-195301_kcck.jpg"
+          alt="Bente Wesselink — hero photo"
+          class="hero__img"
+        />
+        <div class="hero__overlay"></div>
+      </div>
+
+      <div class="hero__content">
+        <p class="hero__eyebrow">Model</p>
+        <h1 class="hero__name">Bente<br />Wesselink</h1>
+        <a href="#portfolio" class="hero__cta">View Portfolio</a>
+      </div>
+
+      <!-- Scroll indicator -->
+      <div class="hero__scroll-indicator" aria-hidden="true">
+        <span class="hero__scroll-line"></span>
+        <span class="hero__scroll-label">Scroll</span>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 2 — PORTFOLIO
+    ============================================================ -->
+    <section class="section portfolio" id="portfolio">
+      <div class="container">
+        <header class="section__header fade-in">
+          <p class="section__label">Work</p>
+          <h2 class="section__title">Portfolio</h2>
+        </header>
+
+        <!-- CSS columns masonry — images preserve their natural aspect ratios -->
+        <div class="portfolio__masonry">
+
+          <article class="portfolio__item fade-in">
+            <div class="portfolio__img-wrap">
+              <img
+                src="https://assets.deboekers.nl/assets/bente-wesselink/5A8A9464.jpg"
+                alt="Bente Wesselink"
+                loading="lazy"
+              />
+              <div class="portfolio__hover"></div>
+            </div>
+          </article>
+
+          <article class="portfolio__item fade-in">
+            <div class="portfolio__img-wrap">
+              <img
+                src="https://assets.deboekers.nl/assets/bente-wesselink/Bente-Wesselink-Manny-Fontanilla-1crop.jpg"
+                alt="Bente Wesselink — Manny Fontanilla"
+                loading="lazy"
+              />
+              <div class="portfolio__hover"></div>
+            </div>
+          </article>
+
+          <article class="portfolio__item fade-in">
+            <div class="portfolio__img-wrap">
+              <img
+                src="https://assets.deboekers.nl/assets/bente-wesselink/MAN_6970-2.jpg"
+                alt="Bente Wesselink"
+                loading="lazy"
+              />
+              <div class="portfolio__hover"></div>
+            </div>
+          </article>
+
+          <article class="portfolio__item fade-in">
+            <div class="portfolio__img-wrap">
+              <img
+                src="https://assets.deboekers.nl/assets/bente-wesselink/BenteW104-683x1024.webp"
+                alt="Bente Wesselink"
+                loading="lazy"
+              />
+              <div class="portfolio__hover"></div>
+            </div>
+          </article>
+
+          <article class="portfolio__item fade-in">
+            <div class="portfolio__img-wrap">
+              <img
+                src="https://assets.deboekers.nl/assets/bente-wesselink/BenteW103-683x1024.webp"
+                alt="Bente Wesselink"
+                loading="lazy"
+              />
+              <div class="portfolio__hover"></div>
+            </div>
+          </article>
+
+          <article class="portfolio__item fade-in">
+            <div class="portfolio__img-wrap">
+              <img
+                src="https://assets.deboekers.nl/assets/bente-wesselink/4-bente-w-balaz-story-model-management-cut.jpg"
+                alt="Bente Wesselink — Balaz Story"
+                loading="lazy"
+              />
+              <div class="portfolio__hover"></div>
+            </div>
+          </article>
+
+          <article class="portfolio__item fade-in">
+            <div class="portfolio__img-wrap">
+              <img
+                src="https://assets.deboekers.nl/assets/bente-wesselink/MAN_7527-2_2024-07-02-122723_hrcj.jpg"
+                alt="Bente Wesselink"
+                loading="lazy"
+              />
+              <div class="portfolio__hover"></div>
+            </div>
+          </article>
+
+          <article class="portfolio__item fade-in">
+            <div class="portfolio__img-wrap">
+              <img
+                src="https://assets.deboekers.nl/assets/bente-wesselink/MAN_7068.jpg"
+                alt="Bente Wesselink"
+                loading="lazy"
+              />
+              <div class="portfolio__hover"></div>
+            </div>
+          </article>
+
+          <article class="portfolio__item fade-in">
+            <div class="portfolio__img-wrap">
+              <img
+                src="https://assets.deboekers.nl/assets/bente-wesselink/MAN_7123.jpg"
+                alt="Bente Wesselink"
+                loading="lazy"
+              />
+              <div class="portfolio__hover"></div>
+            </div>
+          </article>
+
+          <article class="portfolio__item fade-in">
+            <div class="portfolio__img-wrap">
+              <img
+                src="https://assets.deboekers.nl/assets/bente-wesselink/1V8A6697_RT-michael-casker.jpg"
+                alt="Bente Wesselink — Michael Casker"
+                loading="lazy"
+              />
+              <div class="portfolio__hover"></div>
+            </div>
+          </article>
+
+          <article class="portfolio__item fade-in">
+            <div class="portfolio__img-wrap">
+              <img
+                src="https://assets.deboekers.nl/assets/bente-wesselink/1V8A4474_RT-michael-casker.jpg"
+                alt="Bente Wesselink — Michael Casker"
+                loading="lazy"
+              />
+              <div class="portfolio__hover"></div>
+            </div>
+          </article>
+
+          <article class="portfolio__item fade-in">
+            <div class="portfolio__img-wrap">
+              <img
+                src="https://assets.deboekers.nl/assets/bente-wesselink/5A8A9647.jpg"
+                alt="Bente Wesselink"
+                loading="lazy"
+              />
+              <div class="portfolio__hover"></div>
+            </div>
+          </article>
+
+          <article class="portfolio__item fade-in">
+            <div class="portfolio__img-wrap">
+              <img
+                src="https://assets.deboekers.nl/assets/bente-wesselink/5A8A9797.jpg"
+                alt="Bente Wesselink"
+                loading="lazy"
+              />
+              <div class="portfolio__hover"></div>
+            </div>
+          </article>
+
+          <article class="portfolio__item fade-in">
+            <div class="portfolio__img-wrap">
+              <img
+                src="https://assets.deboekers.nl/assets/bente-wesselink/5A8A9865.jpg"
+                alt="Bente Wesselink"
+                loading="lazy"
+              />
+              <div class="portfolio__hover"></div>
+            </div>
+          </article>
+
+        </div><!-- /.portfolio__masonry -->
+      </div><!-- /.container -->
+    </section>
+
+    <!-- ============================================================
+         SECTION 3 — STATS / MEASUREMENTS
+    ============================================================ -->
+    <section class="section stats" id="stats">
+      <div class="container">
+        <header class="section__header fade-in">
+          <p class="section__label">Details</p>
+          <h2 class="section__title">Measurements</h2>
+        </header>
+
+        <div class="stats__grid fade-in">
+
+          <div class="stats__card">
+            <p class="stats__label">Height</p>
+            <p class="stats__value">176 cm</p>
+          </div>
+
+          <div class="stats__card">
+            <p class="stats__label">Dress</p>
+            <p class="stats__value">36</p>
+          </div>
+
+          <div class="stats__card">
+            <p class="stats__label">Bust</p>
+            <p class="stats__value">84 cm</p>
+          </div>
+
+          <div class="stats__card">
+            <p class="stats__label">Waist</p>
+            <p class="stats__value">61 cm</p>
+          </div>
+
+          <div class="stats__card">
+            <p class="stats__label">Hips</p>
+            <p class="stats__value">93 cm</p>
+          </div>
+
+          <div class="stats__card">
+            <p class="stats__label">Shoe</p>
+            <p class="stats__value">39</p>
+          </div>
+
+          <div class="stats__card">
+            <p class="stats__label">Hair</p>
+            <p class="stats__value">Blond</p>
+          </div>
+
+          <div class="stats__card">
+            <p class="stats__label">Eyes</p>
+            <p class="stats__value">Blue-green</p>
+          </div>
+
+          <!-- Agency — full-width row, styled as a link card -->
+          <div class="stats__card stats__card--agency">
+            <p class="stats__label">Agency</p>
+            <a
+              href="https://www.deboekers.nl/women/national/bente-wesselink"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="stats__value stats__agency-link"
+            >
+              De Boekers
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="7" y1="17" x2="17" y2="7"/>
+                <polyline points="7 7 17 7 17 17"/>
+              </svg>
+            </a>
+          </div>
+
+        </div><!-- /.stats__grid -->
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 4 — ABOUT
+    ============================================================ -->
+    <section class="section about" id="about">
+      <div class="container">
+        <div class="about__inner">
+
+          <div class="about__image fade-in">
+            <img
+              src="https://assets.deboekers.nl/assets/bente-wesselink/Rp4530BWnew.jpg"
+              alt="Bente Wesselink portrait"
+            />
+          </div>
+
+          <div class="about__text fade-in">
+            <header class="section__header section__header--left">
+              <p class="section__label">Story</p>
+              <h2 class="section__title">About</h2>
+            </header>
+
+            <!-- REPLACE: replace this placeholder bio with Bente's actual biography -->
+            <p class="about__bio">
+              Bente Wesselink is a Dutch model based in Amsterdam, represented by De Boekers.
+              With a distinctive presence and versatile range, she has worked with acclaimed
+              photographers, leading fashion houses, and global brands across editorial,
+              commercial, and runway projects.
+            </p>
+            <p class="about__bio">
+              <!-- REPLACE: update with Bente's personal story / background -->
+              Known for her effortless elegance and natural ability in front of the camera, Bente
+              brings both professionalism and creativity to every project. Whether on set or on
+              the runway, she brings a quiet intensity that translates beautifully across every medium.
+            </p>
+
+            <div class="about__agency">
+              <p class="about__agency-label">Represented by</p>
+              <a
+                href="https://www.deboekers.nl/women/national/bente-wesselink"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="about__agency-name"
+              >De Boekers</a>
+              <!-- REPLACE: add booking email address if applicable -->
+              <!-- <a href="mailto:booking@deboekers.nl" class="about__agency-link">booking@deboekers.nl</a> -->
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 5 — CONTACT
+    ============================================================ -->
+    <section class="section contact" id="contact">
+      <div class="container">
+        <div class="contact__inner">
+
+          <div class="contact__intro fade-in">
+            <header class="section__header section__header--left">
+              <p class="section__label">Get in Touch</p>
+              <h2 class="section__title">Contact</h2>
+            </header>
+            <p class="contact__text">
+              For bookings, collaborations, and general enquiries, please reach out using the form
+              or follow along on Instagram.
+            </p>
+
+            <div class="contact__social">
+              <a
+                href="https://www.instagram.com/bentewesselink/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="contact__social-link"
+                aria-label="Instagram"
+              >
+                <!-- Instagram SVG icon -->
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                  <circle cx="12" cy="12" r="4"/>
+                  <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/>
+                </svg>
+                <span>@bentewesselink</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Contact form -->
+          <!-- REPLACE: wire up the form's action to an actual form handler (e.g. Formspree, Netlify Forms) -->
+          <form class="contact__form fade-in" id="contact-form" novalidate>
+            <div class="form__group">
+              <label class="form__label" for="name">Name</label>
+              <input
+                class="form__input"
+                type="text"
+                id="name"
+                name="name"
+                placeholder="Your name"
+                required
+              />
+            </div>
+
+            <div class="form__group">
+              <label class="form__label" for="email">Email</label>
+              <input
+                class="form__input"
+                type="email"
+                id="email"
+                name="email"
+                placeholder="your@email.com"
+                required
+              />
+            </div>
+
+            <div class="form__group">
+              <label class="form__label" for="message">Message</label>
+              <textarea
+                class="form__textarea"
+                id="message"
+                name="message"
+                rows="5"
+                placeholder="Tell me about your project..."
+                required
+              ></textarea>
+            </div>
+
+            <button class="form__submit" type="submit">
+              <span class="form__submit-text">Send Message</span>
+              <svg class="form__submit-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="5" y1="12" x2="19" y2="12"/>
+                <polyline points="12 5 19 12 12 19"/>
+              </svg>
+            </button>
+
+            <!-- Success / error message displayed by JS -->
+            <p class="form__feedback" id="form-feedback" aria-live="polite"></p>
+          </form>
+
+        </div><!-- /.contact__inner -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer class="footer">
+    <div class="container">
+      <p class="footer__copy">
+        &copy; <span id="footer-year"></span> Bente Wesselink. All rights reserved.
+      </p>
+      <a
+        href="https://www.deboekers.nl/women/national/bente-wesselink"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="footer__agency"
+      >Management: De Boekers</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
