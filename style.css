@@ -397,6 +397,77 @@ button {
 }
 
 /* ----------------------------------------------------------
+   5a. Hero — Desktop split-screen layout (≥ 1024 px)
+   On wide viewports the hero becomes two columns:
+     • Left  42% — white panel with text (dark ink)
+     • Right 58% — portrait image, object-fit: cover + object-position: center top
+   The image container is now roughly portrait-shaped, so cover
+   barely crops the photo and the full face + upper body are visible.
+---------------------------------------------------------- */
+@media (min-width: 1024px) {
+  .hero {
+    flex-direction: row;
+    align-items: stretch;
+    height: 100svh;
+    min-height: 700px;
+  }
+
+  /* Image pane — occupies the right 58% at full height */
+  .hero__image-wrap {
+    position: relative; /* lift out of absolute positioning */
+    inset: auto;
+    flex: 0 0 58%;
+    order: 2;
+  }
+
+  /* Text pane — white, left 42% */
+  .hero__content {
+    position: relative;
+    flex: 0 0 42%;
+    order: 1;
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    background: var(--c-white);
+    color: var(--c-ink);
+    padding: 3.5rem clamp(2.5rem, 4vw, 5rem);
+    z-index: 2;
+  }
+
+  /* Switch text colours from white → ink on the white panel */
+  .hero__name    { color: var(--c-ink); }
+  .hero__eyebrow { color: var(--c-ink); opacity: 0.45; }
+  .hero__cta     {
+    color: var(--c-ink);
+    border-bottom-color: rgba(0,0,0,0.35);
+  }
+  .hero__cta:hover {
+    border-bottom-color: var(--c-ink);
+    opacity: 1;
+  }
+
+  /* Lighten overlay — text is no longer sitting on the image */
+  .hero__overlay {
+    background: linear-gradient(
+      to bottom,
+      rgba(0,0,0,0) 0%,
+      rgba(0,0,0,0.18) 100%
+    );
+  }
+
+  /* Scroll indicator sits inside the image pane */
+  .hero__scroll-indicator {
+    right: clamp(1.5rem, 3vw, 2.5rem);
+    color: rgba(255,255,255,0.75);
+  }
+
+  /* Keep nav text dark on desktop — half the hero is white */
+  .nav--over-hero .nav__logo,
+  .nav--over-hero .nav__link { color: var(--c-ink); }
+}
+
+/* ----------------------------------------------------------
    6. Portfolio Section
 ---------------------------------------------------------- */
 .portfolio {
