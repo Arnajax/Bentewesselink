@@ -397,9 +397,18 @@
             </div>
           </div>
 
-          <!-- Contact form -->
-          <!-- REPLACE: wire up the form's action to an actual form handler (e.g. Formspree, Netlify Forms) -->
-          <form class="contact__form fade-in" id="contact-form" novalidate>
+          <!-- Contact form — powered by Web3Forms -->
+          <form
+            class="contact__form fade-in"
+            id="contact-form"
+            action="https://api.web3forms.com/submit"
+            method="POST"
+            novalidate
+          >
+            <!-- Web3Forms access key -->
+            <input type="hidden" name="access_key" value="7e82530d-b9f5-4022-bc0c-7aff30a5082b" />
+            <!-- Prevent page redirect; success/error is handled by the JS fetch handler -->
+            <input type="hidden" name="redirect" value="false" />
             <div class="form__group">
               <label class="form__label" for="name">Name</label>
               <input

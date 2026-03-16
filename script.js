@@ -125,24 +125,26 @@
 })();
 
 /* ----------------------------------------------------------
-   4. Contact form — client-side feedback
-   NOTE: Replace this stub with a real form submission
-         (e.g. Formspree, Netlify Forms, or a backend endpoint).
+   4. Contact form — Web3Forms submission
+   Docs: https://web3forms.com/
+   redirect=false is set via a hidden input so the page never
+   navigates away; we handle the JSON response here instead.
 ---------------------------------------------------------- */
 (function initContactForm() {
   const form     = document.getElementById('contact-form');
   const feedback = document.getElementById('form-feedback');
+  const btn      = form ? form.querySelector('.form__submit') : null;
 
-  if (!form || !feedback) return;
+  if (!form || !feedback || !btn) return;
 
   form.addEventListener('submit', function (e) {
     e.preventDefault();
 
-    const name    = form.name.value.trim();
-    const email   = form.email.value.trim();
-    const message = form.message.value.trim();
+    const name    = form.elements['name'].value.trim();
+    const email   = form.elements['email'].value.trim();
+    const message = form.elements['message'].value.trim();
 
-    /* Basic validation */
+    /* --- Client-side validation --- */
     if (!name || !email || !message) {
       showFeedback('Please fill in all fields.', 'error');
       return;
@@ -153,27 +155,40 @@
       return;
     }
 
-    /* --- REPLACE: swap the lines below with your real form submission logic ---
-       Example using Formspree:
-         fetch('https://formspree.io/f/YOUR_FORM_ID', {
-           method: 'POST',
-           headers: { 'Accept': 'application/json' },
-           body: new FormData(form)
-         })
-         .then(r => r.ok ? handleSuccess() : handleError())
-         .catch(handleError);
-    ----------------------------------------------------------------------- */
+    /* --- Submit to Web3Forms via fetch --- */
+    btn.disabled = true;
+    btn.querySelector('.form__submit-text').textContent = 'Sending…';
 
-    // Simulate success for demo purposes
-    handleSuccess();
+    fetch(form.action, {
+      method: 'POST',
+      headers: { 'Accept': 'application/json' },
+      body: new FormData(form),
+    })
+      .then(function (response) { return response.json(); })
+      .then(function (data) {
+        if (data.success) {
+          handleSuccess();
+        } else {
+          // Web3Forms may return a human-readable message on failure
+          handleError(data.message || null);
+        }
+      })
+      .catch(function () { handleError(null); })
+      .finally(function () {
+        btn.disabled = false;
+        btn.querySelector('.form__submit-text').textContent = 'Send Message';
+      });
 
     function handleSuccess() {
       showFeedback('Thank you — your message has been sent!', 'success');
       form.reset();
     }
 
-    function handleError() {
-      showFeedback('Something went wrong. Please try again or email directly.', 'error');
+    function handleError(msg) {
+      showFeedback(
+        msg || 'Something went wrong. Please try again or reach out on Instagram.',
+        'error'
+      );
     }
   });
 
@@ -182,8 +197,8 @@
     feedback.className   = 'form__feedback is-' + type;
   }
 
-  function isValidEmail(email) {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  function isValidEmail(addr) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(addr);
   }
 })();
 
