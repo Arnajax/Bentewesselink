@@ -233,27 +233,15 @@
           >@bentewesselink</a>
         </header>
 
-        <!-- Instagram embed widget -->
+        <!-- Instagram embed widget — Behold.so feed-id: gouzz2vY0yHxaXTm1XVK -->
         <div class="instagram__embed fade-in">
-          <!-- REPLACE: paste your Behold.so (or EmbedSocial) widget code here.
-               Example — Behold.so:
-                 1. Create a free account at https://behold.so
-                 2. Connect your @bentewesselink Instagram account
-                 3. Copy the <behold-widget feed-id="YOUR_FEED_ID"> snippet and paste it below.
-               The placeholder card below is shown until the real widget is added. -->
-          <div class="instagram__placeholder">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                 stroke="currentColor" stroke-width="1.2" stroke-linecap="round"
-                 stroke-linejoin="round" aria-hidden="true" class="instagram__placeholder-icon">
-              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-              <circle cx="12" cy="12" r="4"/>
-              <circle cx="17.5" cy="6.5" r="0.8" fill="currentColor" stroke="none"/>
-            </svg>
-            <p class="instagram__placeholder-text">
-              Instagram feed widget goes here.<br>
-              See the <code><!-- REPLACE --></code> comment above for setup instructions.
-            </p>
-          </div>
+          <behold-widget feed-id="gouzz2vY0yHxaXTm1XVK"></behold-widget>
+          <script>
+            (() => {
+              const d=document,s=d.createElement("script");s.type="module";
+              s.src="https://w.behold.so/widget.js";d.head.append(s);
+            })();
+          </script>
         </div>
 
       </div>

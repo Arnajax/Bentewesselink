@@ -732,41 +732,17 @@ button {
 
 .instagram__embed {
   margin-top: clamp(2rem, 4vw, 3.5rem);
-  /* Behold.so / EmbedSocial widget fills this container at 100% width */
+  padding-block: clamp(1rem, 2vw, 1.5rem);
   width: 100%;
+  display: flex;
+  justify-content: center;
+  /* Behold widget renders as a custom element; let it set its own width */
 }
 
-/* Placeholder card — visible until the real widget is pasted in */
-.instagram__placeholder {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 1.25rem;
-  padding: clamp(2.5rem, 6vw, 5rem) 2rem;
-  border: 1px dashed var(--c-line);
-  border-radius: 2px;
-  color: var(--c-stone);
-  text-align: center;
-}
-.instagram__placeholder-icon {
-  width: 42px;
-  height: 42px;
-  opacity: 0.4;
-}
-.instagram__placeholder-text {
-  font-size: 0.85rem;
-  line-height: 1.7;
-  color: var(--c-stone);
-  max-width: 36ch;
-}
-.instagram__placeholder-text code {
-  font-family: monospace;
-  font-size: 0.8em;
-  background: #f4f2ef;
-  padding: 0.1em 0.4em;
-  border-radius: 3px;
-  color: var(--c-ink);
+/* Ensure the Behold custom element stretches to fill the container */
+behold-widget {
+  width: 100%;
+  display: block;
 }
 
 /* ----------------------------------------------------------
