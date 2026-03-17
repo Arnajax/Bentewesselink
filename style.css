@@ -710,6 +710,66 @@ button {
 }
 
 /* ----------------------------------------------------------
+   8b. Instagram Section
+---------------------------------------------------------- */
+.instagram { background: var(--c-white); }
+
+.instagram__handle {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--c-stone);
+  margin-top: 0.6rem;
+  border-bottom: 1px solid transparent;
+  transition: color var(--transition-fast), border-color var(--transition-fast);
+}
+.instagram__handle:hover {
+  color: var(--c-ink);
+  border-bottom-color: var(--c-ink);
+}
+
+.instagram__embed {
+  margin-top: clamp(2rem, 4vw, 3.5rem);
+  /* Behold.so / EmbedSocial widget fills this container at 100% width */
+  width: 100%;
+}
+
+/* Placeholder card — visible until the real widget is pasted in */
+.instagram__placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  padding: clamp(2.5rem, 6vw, 5rem) 2rem;
+  border: 1px dashed var(--c-line);
+  border-radius: 2px;
+  color: var(--c-stone);
+  text-align: center;
+}
+.instagram__placeholder-icon {
+  width: 42px;
+  height: 42px;
+  opacity: 0.4;
+}
+.instagram__placeholder-text {
+  font-size: 0.85rem;
+  line-height: 1.7;
+  color: var(--c-stone);
+  max-width: 36ch;
+}
+.instagram__placeholder-text code {
+  font-family: monospace;
+  font-size: 0.8em;
+  background: #f4f2ef;
+  padding: 0.1em 0.4em;
+  border-radius: 3px;
+  color: var(--c-ink);
+}
+
+/* ----------------------------------------------------------
    9. Contact Section
 ---------------------------------------------------------- */
 .contact {
@@ -851,6 +911,33 @@ button {
 
 .form__feedback.is-success { color: #4a7c59; }
 .form__feedback.is-error   { color: #9b3a2e; }
+
+/* Agency booking note — sits below the form */
+.contact__agency-note {
+  grid-column: 1 / -1;          /* full width across both grid columns */
+  margin-top: clamp(2rem, 4vw, 3rem);
+  padding-top: clamp(1.5rem, 3vw, 2.25rem);
+  border-top: 1px solid var(--c-line);
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  color: var(--c-stone);
+  line-height: 1.9;
+  text-align: center;
+}
+.contact__agency-email {
+  display: inline-block;
+  margin-top: 0.25rem;
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--c-ink);
+  border-bottom: 1px solid var(--c-line);
+  transition: border-color var(--transition-fast), color var(--transition-fast);
+}
+.contact__agency-email:hover {
+  color: var(--c-ink);
+  border-bottom-color: var(--c-ink);
+}
 
 @media (max-width: 768px) {
   .contact__inner {

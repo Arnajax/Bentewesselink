@@ -31,10 +31,11 @@
     </button>
 
     <ul class="nav__links" id="nav-links">
-      <li><a href="#portfolio" class="nav__link">Portfolio</a></li>
-      <li><a href="#stats"     class="nav__link">Stats</a></li>
-      <li><a href="#about"     class="nav__link">About</a></li>
-      <li><a href="#contact"   class="nav__link">Contact</a></li>
+      <li><a href="#portfolio"  class="nav__link">Portfolio</a></li>
+      <li><a href="#instagram"  class="nav__link">Instagram</a></li>
+      <li><a href="#stats"      class="nav__link">Stats</a></li>
+      <li><a href="#about"      class="nav__link">About</a></li>
+      <li><a href="#contact"    class="nav__link">Contact</a></li>
     </ul>
   </nav>
 
@@ -181,28 +182,6 @@
           <article class="portfolio__item fade-in">
             <div class="portfolio__img-wrap">
               <img
-                src="https://assets.deboekers.nl/assets/bente-wesselink/1V8A6697_RT-michael-casker.jpg"
-                alt="Bente Wesselink — Michael Casker"
-                loading="lazy"
-              />
-              <div class="portfolio__hover"></div>
-            </div>
-          </article>
-
-          <article class="portfolio__item fade-in">
-            <div class="portfolio__img-wrap">
-              <img
-                src="https://assets.deboekers.nl/assets/bente-wesselink/1V8A4474_RT-michael-casker.jpg"
-                alt="Bente Wesselink — Michael Casker"
-                loading="lazy"
-              />
-              <div class="portfolio__hover"></div>
-            </div>
-          </article>
-
-          <article class="portfolio__item fade-in">
-            <div class="portfolio__img-wrap">
-              <img
                 src="https://assets.deboekers.nl/assets/bente-wesselink/5A8A9647.jpg"
                 alt="Bente Wesselink"
                 loading="lazy"
@@ -235,6 +214,49 @@
 
         </div><!-- /.portfolio__masonry -->
       </div><!-- /.container -->
+    </section>
+
+    <!-- ============================================================
+         SECTION 2b — INSTAGRAM FEED
+    ============================================================ -->
+    <section class="section instagram" id="instagram">
+      <div class="container">
+
+        <header class="section__header fade-in">
+          <p class="section__label">Instagram</p>
+          <h2 class="section__title">Follow Along</h2>
+          <a
+            href="https://www.instagram.com/bentewesselink/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="instagram__handle"
+          >@bentewesselink</a>
+        </header>
+
+        <!-- Instagram embed widget -->
+        <div class="instagram__embed fade-in">
+          <!-- REPLACE: paste your Behold.so (or EmbedSocial) widget code here.
+               Example — Behold.so:
+                 1. Create a free account at https://behold.so
+                 2. Connect your @bentewesselink Instagram account
+                 3. Copy the <behold-widget feed-id="YOUR_FEED_ID"> snippet and paste it below.
+               The placeholder card below is shown until the real widget is added. -->
+          <div class="instagram__placeholder">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="1.2" stroke-linecap="round"
+                 stroke-linejoin="round" aria-hidden="true" class="instagram__placeholder-icon">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+              <circle cx="12" cy="12" r="4"/>
+              <circle cx="17.5" cy="6.5" r="0.8" fill="currentColor" stroke="none"/>
+            </svg>
+            <p class="instagram__placeholder-text">
+              Instagram feed widget goes here.<br>
+              See the <code><!-- REPLACE --></code> comment above for setup instructions.
+            </p>
+          </div>
+        </div>
+
+      </div>
     </section>
 
     <!-- ============================================================
@@ -456,6 +478,12 @@
             <!-- Success / error message displayed by JS -->
             <p class="form__feedback" id="form-feedback" aria-live="polite"></p>
           </form>
+
+          <!-- Agency booking note -->
+          <p class="contact__agency-note fade-in">
+            For modeling bookings &amp; inquiries, please contact my agency directly:<br>
+            <a href="mailto:karin@de-boekers.nl" class="contact__agency-email">karin@de-boekers.nl</a>
+          </p>
 
         </div><!-- /.contact__inner -->
       </div>
