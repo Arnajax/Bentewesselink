@@ -497,7 +497,9 @@ button {
   height: auto;
   display: block;
   object-fit: cover;
+  object-position: top center; /* keep faces/heads in frame */
   transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
 }
 
 .portfolio__item:hover .portfolio__img-wrap img {
@@ -574,6 +576,7 @@ button {
   /* Images always fill their container on mobile */
   .portfolio__img-wrap img {
     height: 100%;
+    object-position: top center;
   }
 
   /* Hidden extras — revealed by JS on "Load more" tap */
@@ -617,6 +620,90 @@ button {
   .portfolio__load-more.is-done {
     display: none;
   }
+}
+
+/* ----------------------------------------------------------
+   6b. Lightbox
+---------------------------------------------------------- */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.lightbox.is-open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.lightbox__img {
+  max-width: 90vw;
+  max-height: 90vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+  border: none;
+  /* pop-in scale */
+  transform: scale(0.96);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  /* prevent the click-outside handler triggering on the image itself */
+  pointer-events: none;
+}
+
+.lightbox.is-open .lightbox__img {
+  transform: scale(1);
+}
+
+.lightbox__close {
+  position: fixed;
+  top: 1.25rem;
+  right: 1.5rem;
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 2rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  transition: color 0.15s ease;
+  z-index: 1001;
+}
+
+.lightbox__close:hover { color: #fff; }
+
+.lightbox__nav {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 2rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 1rem 1.25rem;
+  transition: color 0.15s ease;
+  z-index: 1001;
+  /* keep nav arrows above the image but don't block the outer-click */
+  pointer-events: all;
+}
+
+.lightbox__nav:hover { color: #fff; }
+.lightbox__nav--prev { left: 0.5rem; }
+.lightbox__nav--next { right: 0.5rem; }
+
+/* Hide arrows on mobile — swipe is used instead */
+@media (max-width: 600px) {
+  .lightbox__nav { display: none; }
 }
 
 /* ----------------------------------------------------------

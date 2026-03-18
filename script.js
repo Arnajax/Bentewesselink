@@ -231,7 +231,96 @@
 })();
 
 /* ----------------------------------------------------------
-   6. Footer — dynamic year
+   6. Lightbox
+   Opens any portfolio image full-screen. On mobile, swipe
+   left/right navigates between images. Click outside or press
+   Escape to close. No external libraries.
+---------------------------------------------------------- */
+(function initLightbox() {
+  var lightbox  = document.getElementById('lightbox');
+  var lb_img    = document.getElementById('lightbox-img');
+  var lb_close  = document.getElementById('lightbox-close');
+  var lb_prev   = document.getElementById('lightbox-prev');
+  var lb_next   = document.getElementById('lightbox-next');
+
+  if (!lightbox || !lb_img) return;
+
+  /* Collect all portfolio images in DOM order (including extras) */
+  function getImages() {
+    return Array.from(document.querySelectorAll('.portfolio__img-wrap img'));
+  }
+
+  var currentIndex = 0;
+
+  function open(index) {
+    var imgs = getImages();
+    if (!imgs.length) return;
+    currentIndex = ((index % imgs.length) + imgs.length) % imgs.length;
+    var target = imgs[currentIndex];
+    lb_img.src = target.src;
+    lb_img.alt = target.alt;
+    lightbox.classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function close() {
+    lightbox.classList.remove('is-open');
+    document.body.style.overflow = '';
+    /* Clear src after transition so old image doesn't flash on next open */
+    setTimeout(function () { lb_img.src = ''; }, 320);
+  }
+
+  function prev() { open(currentIndex - 1); }
+  function next() { open(currentIndex + 1); }
+
+  /* ── Attach click listeners to portfolio images ── */
+  document.addEventListener('click', function (e) {
+    var img = e.target.closest('.portfolio__img-wrap img');
+    if (!img) return;
+    var imgs = getImages();
+    var idx  = imgs.indexOf(img);
+    open(idx >= 0 ? idx : 0);
+  });
+
+  /* ── Controls ── */
+  lb_close.addEventListener('click', close);
+  lb_prev.addEventListener('click', function (e) { e.stopPropagation(); prev(); });
+  lb_next.addEventListener('click', function (e) { e.stopPropagation(); next(); });
+
+  /* Click outside image (on the dark backdrop) closes */
+  lightbox.addEventListener('click', function (e) {
+    if (e.target === lightbox) close();
+  });
+
+  /* Keyboard: Escape = close, arrows = navigate */
+  document.addEventListener('keydown', function (e) {
+    if (!lightbox.classList.contains('is-open')) return;
+    if (e.key === 'Escape')      close();
+    if (e.key === 'ArrowLeft')   prev();
+    if (e.key === 'ArrowRight')  next();
+  });
+
+  /* ── Touch swipe (mobile) ── */
+  var touchStartX = 0;
+  var touchStartY = 0;
+
+  lightbox.addEventListener('touchstart', function (e) {
+    touchStartX = e.changedTouches[0].clientX;
+    touchStartY = e.changedTouches[0].clientY;
+  }, { passive: true });
+
+  lightbox.addEventListener('touchend', function (e) {
+    var dx = e.changedTouches[0].clientX - touchStartX;
+    var dy = e.changedTouches[0].clientY - touchStartY;
+    /* Only treat as horizontal swipe if dx dominates */
+    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) {
+      if (dx < 0) next(); else prev();
+    }
+  }, { passive: true });
+})();
+
+/* ----------------------------------------------------------
+   7. Footer — dynamic year
 ---------------------------------------------------------- */
 (function initFooterYear() {
   const yearEl = document.getElementById('footer-year');
