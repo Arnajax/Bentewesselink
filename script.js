@@ -231,93 +231,190 @@
 })();
 
 /* ----------------------------------------------------------
-   6. Lightbox
-   Opens any portfolio image full-screen. On mobile, swipe
-   left/right navigates between images. Click outside or press
-   Escape to close. No external libraries.
+   6. Lightbox — complete rewrite
+   Root cause of previous failure: .portfolio__hover is
+   position:absolute inset:0 and intercepts all clicks before
+   they reach the <img>. Fix: bind to .portfolio__img-wrap
+   (the container) instead of the img directly.
+
+   DOM is injected by this script. Styles via a <style> tag
+   so media queries work (mobile hides arrow buttons).
 ---------------------------------------------------------- */
-(function initLightbox() {
-  var lightbox  = document.getElementById('lightbox');
-  var lb_img    = document.getElementById('lightbox-img');
-  var lb_close  = document.getElementById('lightbox-close');
-  var lb_prev   = document.getElementById('lightbox-prev');
-  var lb_next   = document.getElementById('lightbox-next');
+document.addEventListener('DOMContentLoaded', function () {
 
-  if (!lightbox || !lb_img) return;
+  /* ── Inject styles ─────────────────────────────────────── */
+  var lbStyle = document.createElement('style');
+  lbStyle.textContent = [
+    '#lb-overlay {',
+    '  display:none; position:fixed; inset:0; z-index:9999;',
+    '  background:rgba(0,0,0,0.92);',
+    '  align-items:center; justify-content:center;',
+    '  opacity:0; transition:opacity 200ms ease;',
+    '}',
+    '#lb-overlay.lb-open    { display:flex; }',
+    '#lb-overlay.lb-visible { opacity:1; }',
+    '#lb-img {',
+    '  max-width:92vw; max-height:88vh;',
+    '  width:auto; height:auto;',
+    '  object-fit:contain; display:block;',
+    '  transform:scale(0.96);',
+    '  transition:transform 220ms ease-out;',
+    '  pointer-events:none; border:none; outline:none;',
+    '}',
+    '#lb-overlay.lb-visible #lb-img { transform:scale(1); }',
+    '#lb-close {',
+    '  position:fixed; top:12px; right:12px;',
+    '  width:44px; height:44px;',
+    '  display:flex; align-items:center; justify-content:center;',
+    '  background:none; border:none;',
+    '  color:rgba(255,255,255,0.85); font-size:30px; line-height:1;',
+    '  cursor:pointer; z-index:10000;',
+    '  transition:color 120ms ease; padding:0;',
+    '}',
+    '#lb-close:hover { color:#fff; }',
+    '#lb-prev, #lb-next {',
+    '  position:fixed; top:50%; transform:translateY(-50%);',
+    '  width:44px; height:44px;',
+    '  display:flex; align-items:center; justify-content:center;',
+    '  background:none; border:none;',
+    '  color:rgba(255,255,255,0.6); font-size:44px; line-height:1;',
+    '  cursor:pointer; z-index:10000;',
+    '  transition:color 120ms ease; padding:0;',
+    '}',
+    '#lb-prev:hover, #lb-next:hover { color:#fff; }',
+    '#lb-prev { left:4px; }',
+    '#lb-next { right:4px; }',
+    '@media (max-width:600px) { #lb-prev, #lb-next { display:none; } }',
+    '.portfolio__img-wrap { cursor:pointer; }',
+  ].join('\n');
+  document.head.appendChild(lbStyle);
 
-  /* Collect all portfolio images in DOM order (including extras) */
+  /* ── Build DOM ──────────────────────────────────────────── */
+  var overlay  = document.createElement('div');   overlay.id  = 'lb-overlay';
+  var lbImg    = document.createElement('img');   lbImg.id    = 'lb-img'; lbImg.alt = '';
+  var closeBtn = document.createElement('button'); closeBtn.id = 'lb-close';
+  var prevBtn  = document.createElement('button'); prevBtn.id  = 'lb-prev';
+  var nextBtn  = document.createElement('button'); nextBtn.id  = 'lb-next';
+
+  closeBtn.innerHTML = '&times;';
+  prevBtn.innerHTML  = '&#8249;';
+  nextBtn.innerHTML  = '&#8250;';
+  closeBtn.setAttribute('aria-label', 'Close');
+  prevBtn.setAttribute('aria-label',  'Previous image');
+  nextBtn.setAttribute('aria-label',  'Next image');
+
+  overlay.appendChild(closeBtn);
+  overlay.appendChild(prevBtn);
+  overlay.appendChild(nextBtn);
+  overlay.appendChild(lbImg);
+  document.body.appendChild(overlay);
+
+  /* ── State ──────────────────────────────────────────────── */
+  var currentIndex = 0;
+  var isOpen = false;
+
   function getImages() {
     return Array.from(document.querySelectorAll('.portfolio__img-wrap img'));
   }
 
-  var currentIndex = 0;
-
+  /* ── Open / Close ───────────────────────────────────────── */
   function open(index) {
     var imgs = getImages();
     if (!imgs.length) return;
     currentIndex = ((index % imgs.length) + imgs.length) % imgs.length;
-    var target = imgs[currentIndex];
-    lb_img.src = target.src;
-    lb_img.alt = target.alt;
-    lightbox.classList.add('is-open');
+    lbImg.src = imgs[currentIndex].src;
+    lbImg.style.transform = 'scale(0.96)'; /* reset before animation */
+    overlay.classList.add('lb-open');
+    /* Two rAFs: frame 1 triggers display:flex, frame 2 starts transitions */
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        overlay.classList.add('lb-visible');
+      });
+    });
     document.body.style.overflow = 'hidden';
+    isOpen = true;
   }
 
   function close() {
-    lightbox.classList.remove('is-open');
+    overlay.classList.remove('lb-visible');
     document.body.style.overflow = '';
-    /* Clear src after transition so old image doesn't flash on next open */
-    setTimeout(function () { lb_img.src = ''; }, 320);
+    isOpen = false;
+    setTimeout(function () {
+      overlay.classList.remove('lb-open');
+      lbImg.src = '';
+    }, 220);
   }
 
-  function prev() { open(currentIndex - 1); }
-  function next() { open(currentIndex + 1); }
+  function prev() { if (isOpen) open(currentIndex - 1); }
+  function next() { if (isOpen) open(currentIndex + 1); }
 
-  /* ── Attach click listeners to portfolio images ── */
-  document.addEventListener('click', function (e) {
-    var img = e.target.closest('.portfolio__img-wrap img');
-    if (!img) return;
-    var imgs = getImages();
-    var idx  = imgs.indexOf(img);
-    open(idx >= 0 ? idx : 0);
+  /* ── Bind click to each .portfolio__img-wrap ────────────────
+     We bind to the WRAP not the <img> because .portfolio__hover
+     is absolutely positioned on top of the img and intercepts
+     pointer events, making e.target never the img itself.
+  ────────────────────────────────────────────────────────── */
+  function bindWraps() {
+    document.querySelectorAll('.portfolio__img-wrap').forEach(function (wrap) {
+      if (wrap.dataset.lbBound) return;
+      wrap.dataset.lbBound = '1';
+      wrap.addEventListener('click', function () {
+        var imgs = getImages();
+        var img  = wrap.querySelector('img');
+        var idx  = imgs.indexOf(img);
+        open(idx >= 0 ? idx : 0);
+      });
+    });
+  }
+
+  bindWraps();
+
+  /* Re-bind after Load More reveals hidden wraps */
+  var loadMoreBtn = document.getElementById('portfolio-load-more');
+  if (loadMoreBtn) {
+    loadMoreBtn.addEventListener('click', function () {
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () { bindWraps(); });
+      });
+    });
+  }
+
+  /* ── Controls ───────────────────────────────────────────── */
+  closeBtn.addEventListener('click', function (e) { e.stopPropagation(); close(); });
+  prevBtn.addEventListener('click',  function (e) { e.stopPropagation(); prev();  });
+  nextBtn.addEventListener('click',  function (e) { e.stopPropagation(); next();  });
+
+  /* Click on dark backdrop closes */
+  overlay.addEventListener('click', function (e) {
+    if (e.target === overlay) close();
   });
 
-  /* ── Controls ── */
-  lb_close.addEventListener('click', close);
-  lb_prev.addEventListener('click', function (e) { e.stopPropagation(); prev(); });
-  lb_next.addEventListener('click', function (e) { e.stopPropagation(); next(); });
-
-  /* Click outside image (on the dark backdrop) closes */
-  lightbox.addEventListener('click', function (e) {
-    if (e.target === lightbox) close();
-  });
-
-  /* Keyboard: Escape = close, arrows = navigate */
+  /* Keyboard */
   document.addEventListener('keydown', function (e) {
-    if (!lightbox.classList.contains('is-open')) return;
-    if (e.key === 'Escape')      close();
-    if (e.key === 'ArrowLeft')   prev();
-    if (e.key === 'ArrowRight')  next();
+    if (!isOpen) return;
+    if (e.key === 'Escape')     close();
+    if (e.key === 'ArrowLeft')  prev();
+    if (e.key === 'ArrowRight') next();
   });
 
-  /* ── Touch swipe (mobile) ── */
+  /* ── Touch swipe (mobile) ───────────────────────────────── */
   var touchStartX = 0;
   var touchStartY = 0;
 
-  lightbox.addEventListener('touchstart', function (e) {
+  overlay.addEventListener('touchstart', function (e) {
     touchStartX = e.changedTouches[0].clientX;
     touchStartY = e.changedTouches[0].clientY;
   }, { passive: true });
 
-  lightbox.addEventListener('touchend', function (e) {
+  overlay.addEventListener('touchend', function (e) {
     var dx = e.changedTouches[0].clientX - touchStartX;
     var dy = e.changedTouches[0].clientY - touchStartY;
-    /* Only treat as horizontal swipe if dx dominates */
-    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) {
+    /* Require horizontal swipe to dominate and exceed 50 px */
+    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) >= 50) {
       if (dx < 0) next(); else prev();
     }
   }, { passive: true });
-})();
+
+});
 
 /* ----------------------------------------------------------
    7. Footer — dynamic year
