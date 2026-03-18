@@ -146,7 +146,8 @@
             </div>
           </article>
 
-          <article class="portfolio__item fade-in">
+          <!-- Items 7–12: hidden on mobile until "Load more" is tapped -->
+          <article class="portfolio__item portfolio__item--extra fade-in">
             <div class="portfolio__img-wrap">
               <img
                 src="https://assets.deboekers.nl/assets/bente-wesselink/MAN_7527-2_2024-07-02-122723_hrcj.jpg"
@@ -157,7 +158,7 @@
             </div>
           </article>
 
-          <article class="portfolio__item fade-in">
+          <article class="portfolio__item portfolio__item--extra fade-in">
             <div class="portfolio__img-wrap">
               <img
                 src="https://assets.deboekers.nl/assets/bente-wesselink/MAN_7068.jpg"
@@ -168,7 +169,7 @@
             </div>
           </article>
 
-          <article class="portfolio__item fade-in">
+          <article class="portfolio__item portfolio__item--extra fade-in">
             <div class="portfolio__img-wrap">
               <img
                 src="https://assets.deboekers.nl/assets/bente-wesselink/MAN_7123.jpg"
@@ -179,7 +180,7 @@
             </div>
           </article>
 
-          <article class="portfolio__item fade-in">
+          <article class="portfolio__item portfolio__item--extra fade-in">
             <div class="portfolio__img-wrap">
               <img
                 src="https://assets.deboekers.nl/assets/bente-wesselink/5A8A9647.jpg"
@@ -190,7 +191,7 @@
             </div>
           </article>
 
-          <article class="portfolio__item fade-in">
+          <article class="portfolio__item portfolio__item--extra fade-in">
             <div class="portfolio__img-wrap">
               <img
                 src="https://assets.deboekers.nl/assets/bente-wesselink/5A8A9797.jpg"
@@ -201,7 +202,7 @@
             </div>
           </article>
 
-          <article class="portfolio__item fade-in">
+          <article class="portfolio__item portfolio__item--extra fade-in">
             <div class="portfolio__img-wrap">
               <img
                 src="https://assets.deboekers.nl/assets/bente-wesselink/5A8A9865.jpg"
@@ -213,6 +214,12 @@
           </article>
 
         </div><!-- /.portfolio__masonry -->
+
+        <!-- Load more — only rendered/visible on mobile via CSS -->
+        <button id="portfolio-load-more" class="portfolio__load-more" aria-label="Load more photos">
+          Load More
+        </button>
+
       </div><!-- /.container -->
     </section>
 

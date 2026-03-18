@@ -515,13 +515,108 @@ button {
 
 .portfolio__item:hover .portfolio__hover { opacity: 1; }
 
-/* Responsive */
+/* ── Desktop responsive: 2-column masonry below 900 px ─────── */
 @media (max-width: 900px) {
   .portfolio__masonry { columns: 2; }
 }
 
-@media (max-width: 480px) {
-  .portfolio__masonry { columns: 1; }
+/* ── Mobile grid layout (≤ 600 px) ─────────────────────────────
+   Replaces the CSS-columns masonry with an explicit CSS Grid.
+
+   Opener (items 1–3):
+     ┌─────────────┬──────────────┐
+     │             │   img 2 (□)  │
+     │  img 1 (3/4)│              │
+     │  row-span 2 ├──────────────┤
+     │             │   img 3 (□)  │
+     └─────────────┴──────────────┘
+
+   Items 4+ flow naturally in a clean 2-col 3/4 grid.
+   Items 7–12 (.portfolio__item--extra) are hidden until
+   the "Load more" button is tapped.
+──────────────────────────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .portfolio__masonry {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+  }
+
+  .portfolio__item {
+    break-inside: auto; /* reset masonry override */
+    margin-bottom: 0;
+  }
+
+  /* Item 1 — tall portrait spanning rows 1 & 2 */
+  .portfolio__item:nth-child(1) {
+    grid-row: span 2;
+  }
+
+  .portfolio__item:nth-child(1) .portfolio__img-wrap {
+    height: 100%; /* fill the full 2-row span */
+  }
+
+  .portfolio__item:nth-child(1) .portfolio__img-wrap img {
+    height: 100%;
+  }
+
+  /* Items 2 & 3 — stacked squares on the right */
+  .portfolio__item:nth-child(2) .portfolio__img-wrap,
+  .portfolio__item:nth-child(3) .portfolio__img-wrap {
+    aspect-ratio: 1 / 1;
+  }
+
+  /* Items 4+ — 3/4 portrait, clean 2-col flow */
+  .portfolio__item:nth-child(n+4) .portfolio__img-wrap {
+    aspect-ratio: 3 / 4;
+  }
+
+  /* Images always fill their container on mobile */
+  .portfolio__img-wrap img {
+    height: 100%;
+  }
+
+  /* Hidden extras — revealed by JS on "Load more" tap */
+  .portfolio__item--extra {
+    display: none;
+  }
+
+  .portfolio__item--extra.is-revealed {
+    display: block;
+  }
+}
+
+/* ── Load More button ───────────────────────────────────────── */
+/* Hidden on desktop — all images are always visible there */
+.portfolio__load-more {
+  display: none;
+}
+
+@media (max-width: 600px) {
+  .portfolio__load-more {
+    display: block;
+    margin: 1.75rem auto 0;
+    padding: 0.7rem 2.25rem;
+    background: none;
+    border: 1px solid var(--c-stone);
+    color: var(--c-stone);
+    font-family: var(--ff-sans);
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: border-color var(--transition-fast), color var(--transition-fast);
+  }
+
+  .portfolio__load-more:hover {
+    border-color: var(--c-ink);
+    color: var(--c-ink);
+  }
+
+  .portfolio__load-more.is-done {
+    display: none;
+  }
 }
 
 /* ----------------------------------------------------------

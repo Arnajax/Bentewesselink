@@ -203,7 +203,35 @@
 })();
 
 /* ----------------------------------------------------------
-   5. Footer — dynamic year
+   5. Portfolio — "Load more" (mobile only)
+   Items 7–12 carry .portfolio__item--extra and are hidden via
+   CSS on viewports ≤ 600 px. Tapping the button reveals them
+   and immediately triggers their fade-in transition.
+---------------------------------------------------------- */
+(function initPortfolioLoadMore() {
+  var btn    = document.getElementById('portfolio-load-more');
+  var extras = document.querySelectorAll('.portfolio__item--extra');
+
+  if (!btn || !extras.length) return;
+
+  btn.addEventListener('click', function () {
+    extras.forEach(function (item) {
+      item.classList.add('is-revealed');
+    });
+
+    btn.classList.add('is-done'); // CSS hides it
+
+    // Trigger fade-in on the newly visible items after a paint frame
+    requestAnimationFrame(function () {
+      extras.forEach(function (item) {
+        item.classList.add('is-visible');
+      });
+    });
+  });
+})();
+
+/* ----------------------------------------------------------
+   6. Footer — dynamic year
 ---------------------------------------------------------- */
 (function initFooterYear() {
   const yearEl = document.getElementById('footer-year');
